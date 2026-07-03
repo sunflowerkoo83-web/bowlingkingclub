@@ -1,6 +1,6 @@
 import "server-only";
 import { cert, getApps, initializeApp, type App } from "firebase-admin/app";
-import { getFirestore } from "firebase-admin/firestore";
+import { getFirestore, type Firestore } from "firebase-admin/firestore";
 
 function getAdminApp(): App {
   const existing = getApps();
@@ -23,6 +23,13 @@ function getAdminApp(): App {
   });
 }
 
-export function getAdminFirestore() {
-  return getFirestore(getAdminApp());
+let firestore: Firestore | undefined;
+
+export function getAdminFirestore(): Firestore {
+  if (!firestore) {
+    firestore = getFirestore(getAdminApp());
+    // gamesPlayed 등 선택 필드가 비어있을 때 undefined로 전달되므로 허용
+    firestore.settings({ ignoreUndefinedProperties: true });
+  }
+  return firestore;
 }

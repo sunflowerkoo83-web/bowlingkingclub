@@ -1,12 +1,19 @@
 import type { Metadata } from "next";
 import Section from "@/components/ui/Section";
 import GalleryGrid from "@/components/gallery/GalleryGrid";
+import EmptyState from "@/components/ui/EmptyState";
+import ErrorState from "@/components/ui/ErrorState";
+import { getGalleryImages } from "@/lib/firebase/gallery";
 
 export const metadata: Metadata = {
   title: "갤러리 | 볼링킹",
 };
 
-export default function GalleryPage() {
+export const dynamic = "force-dynamic";
+
+export default async function GalleryPage() {
+  const result = await getGalleryImages();
+
   return (
     <Section>
       <h1 className="text-3xl font-black text-navy-600 sm:text-4xl">갤러리</h1>
@@ -15,7 +22,14 @@ export default function GalleryPage() {
       </p>
 
       <div className="mt-10">
-        <GalleryGrid />
+        {result.status === "ok" && <GalleryGrid images={result.images} />}
+        {result.status === "empty" && (
+          <EmptyState
+            title="아직 등록된 사진이 없습니다."
+            description="곧 멋진 활동 사진들로 채워질 예정이에요!"
+          />
+        )}
+        {result.status === "error" && <ErrorState title="갤러리를 불러오지 못했습니다." />}
       </div>
     </Section>
   );

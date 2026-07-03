@@ -7,8 +7,8 @@ export type Member = {
 };
 
 export type GalleryImage = {
-  // src가 없으면 PlaceholderImage로 대체 렌더링됩니다.
-  src?: string;
+  id: string;
+  url: string;
   alt: string;
 };
 

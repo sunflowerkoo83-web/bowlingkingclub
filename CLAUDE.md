@@ -8,7 +8,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 **볼링킹 (BowlingKing)** — 볼링 동호회(10~30명 규모) 홈페이지. 일정 공유, 경기 결과/통계 관리, 회원 커뮤니티를 위한 온라인 허브.
 
-스택: **Next.js 16 (App Router) + TypeScript + Tailwind CSS v4**, **Vercel** 배포, 회원 점수 데이터는 **Firebase Firestore** (Admin SDK, 서버 컴포넌트에서 조회).
+스택: **Next.js 16 (App Router) + TypeScript + Tailwind CSS v4**, **Vercel** 배포, 회원 점수·갤러리 데이터는 **Firebase Firestore** (Admin SDK, 서버 컴포넌트에서 조회), 갤러리 사진 파일은 **Vercel Blob**.
 
 참고 자료:
 - `docs/기획서.docx` — 원본 기획서
@@ -39,8 +39,19 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 - Tailwind v4를 사용하므로 `tailwind.config.ts`가 **없음** — 테마 커스터마이징은 `src/app/globals.css`의 `@theme` 블록에서 CSS 커스텀 프로퍼티로 정의.
 - `params`/`searchParams`는 Promise 기반이므로 `await` 필요 (동적 라우트 추가 시 유의).
-- Firestore 데이터를 매 요청마다 새로 읽는 페이지(`/scores`)는 `export const dynamic = 'force-dynamic'`로 명시.
+- Firestore 데이터를 매 요청마다 새로 읽는 페이지(`/scores`, `/gallery`)는 `export const dynamic = 'force-dynamic'`로 명시.
 - Firebase Admin SDK 초기화(`src/lib/firebase/admin.ts`)는 서버 전용 — 클라이언트 컴포넌트에서 import 금지.
+
+## 관리자 기능 (`/admin`)
+
+운영진이 콘솔에 들어가지 않고 홈페이지에서 직접 갤러리 사진과 회원 점수를 관리할 수 있는 기능.
+
+- **인증**: 운영진 공용 비밀번호 1개(`ADMIN_PASSWORD`) + HMAC 서명 세션 쿠키(`src/lib/auth/session.ts`, `src/lib/auth/require-admin.ts`). 별도 인증 라이브러리 없이 Node `crypto`만 사용. Google 로그인 등 사용자별 인증은 도입하지 않음(운영진 수가 적어 과한 복잡도로 판단).
+- **라우트**: `/admin/login`(공개)과 `/admin`, `/admin/gallery`, `/admin/scores`(`(protected)` 라우트 그룹, `requireAdminSession()`으로 게이트) — 그룹명은 URL에 나타나지 않음.
+- **쓰기 경로는 전부 서버 액션**(`src/app/admin/(protected)/*/actions.ts`)이며, 각 액션 최상단에서 반드시 `requireAdminSession()`을 호출 — 서버 액션은 UI 없이도 직접 호출 가능한 엔드포인트이므로 페이지 보호만으로는 불충분.
+- **갤러리 사진**: 업로드 시 `@vercel/blob`의 `put()`으로 파일 저장 후 URL을 Firestore `gallery` 컬렉션에 기록 (`src/lib/firebase/gallery.ts`). 삭제 시 Firestore 문서와 Blob 파일을 함께 제거. 기존의 정적 `gallery-data.ts`는 제거됨 — 갤러리는 이제 전부 Firestore 기반.
+- **회원 점수**: `src/lib/firebase/scores.ts`의 `upsertMember`/`deleteMember`로 `members` 컬렉션 직접 CRUD.
+- 신규 환경변수: `ADMIN_PASSWORD`, `ADMIN_SESSION_SECRET`, `BLOB_READ_WRITE_TOKEN` (`.env.local.example` 참고).
 
 ## 기능 (기획서 기준, 우선순위순)
 
@@ -59,12 +70,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 |---|---|
 | `/` | 메인 홈 |
 | `/about` | 동호회 소개 / 모집 안내 |
-| `/gallery` | 활동 사진 갤러리 |
+| `/gallery` | 활동 사진 갤러리 (Firestore + Vercel Blob 연동) |
 | `/scores` | 회원 점수 기록 (Firestore 연동) |
 | `/join` | 가입 문의 (가인볼링장 은평점 연락처 안내) |
+| `/admin`, `/admin/gallery`, `/admin/scores` | 운영진 전용 관리 페이지 (비밀번호 로그인) |
 | `/schedule`, `/schedule/{id}` | (확장) 경기 일정 목록 / 상세 |
 | `/community` | (확장) 공지 / 자유글 |
-| `/admin` | (확장) 관리자 페이지 |
 
 ### 회원 권한 체계 (확장 시 참고)
 

@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Section from "@/components/ui/Section";
 import ScoreTable from "@/components/scores/ScoreTable";
-import ScoreEmptyState from "@/components/scores/ScoreEmptyState";
-import ScoreErrorState from "@/components/scores/ScoreErrorState";
+import EmptyState from "@/components/ui/EmptyState";
+import ErrorState from "@/components/ui/ErrorState";
 import { getMemberScores } from "@/lib/firebase/scores";
 
 export const metadata: Metadata = {
@@ -25,8 +25,13 @@ export default async function ScoresPage() {
 
       <div className="mt-10">
         {result.status === "ok" && <ScoreTable members={result.members} />}
-        {result.status === "empty" && <ScoreEmptyState />}
-        {result.status === "error" && <ScoreErrorState />}
+        {result.status === "empty" && (
+          <EmptyState
+            title="아직 등록된 기록이 없습니다."
+            description="경기 결과가 입력되면 이곳에서 회원별 점수를 확인할 수 있어요."
+          />
+        )}
+        {result.status === "error" && <ErrorState title="점수 기록을 불러오지 못했습니다." />}
       </div>
     </Section>
   );
