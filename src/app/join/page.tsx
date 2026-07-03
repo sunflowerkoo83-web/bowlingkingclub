@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Section from "@/components/ui/Section";
+import PageHeader from "@/components/ui/PageHeader";
 import ContactCard from "@/components/contact/ContactCard";
 
 export const metadata: Metadata = {
@@ -8,17 +9,15 @@ export const metadata: Metadata = {
 
 export default function JoinPage() {
   return (
-    <Section>
-      <div className="text-center">
-        <h1 className="text-3xl font-black text-navy-600 sm:text-4xl">Join</h1>
-        <p className="mx-auto mt-3 max-w-xl text-navy-600/80">
-          볼링킹은 언제나 새로운 회원을 환영합니다. 아래 연락처로 문의해 주세요.
-        </p>
-      </div>
-
-      <div className="mt-10">
+    <>
+      <PageHeader
+        eyebrow="Get Started"
+        title="Join"
+        description="볼링킹은 언제나 새로운 회원을 환영합니다. 아래 연락처로 문의해 주세요."
+      />
+      <Section>
         <ContactCard />
-      </div>
-    </Section>
+      </Section>
+    </>
   );
 }

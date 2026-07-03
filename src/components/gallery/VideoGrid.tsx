@@ -19,6 +19,7 @@ export default function VideoGrid({ videos }: { videos: YouTubeVideo[] }) {
               src={video.thumbnailUrl}
               alt={video.title}
               fill
+              sizes="(min-width: 768px) 33vw, 50vw"
               className="object-cover transition-transform group-hover:scale-105"
             />
             <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 transition-opacity group-hover:opacity-100">
