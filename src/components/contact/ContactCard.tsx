@@ -1,5 +1,5 @@
 import Card from "@/components/ui/Card";
-import { BOWLING_CENTER } from "@/lib/constants";
+import { BOWLING_CENTER, BAND_URL } from "@/lib/constants";
 
 export default function ContactCard() {
   return (
@@ -18,6 +18,14 @@ export default function ContactCard() {
           className="flex min-h-[44px] items-center justify-center gap-2 rounded-full bg-ember-600 px-6 font-semibold text-white transition-colors hover:bg-ember-700"
         >
           {BOWLING_CENTER.phone} 전화하기
+        </a>
+        <a
+          href={BAND_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex min-h-[44px] items-center justify-center gap-2 rounded-full border border-navy-600 px-6 font-semibold text-navy-600 transition-colors hover:bg-navy-50"
+        >
+          네이버 밴드에서 만나기
         </a>
         <p className="text-sm text-navy-600/70">{BOWLING_CENTER.address}</p>
       </div>
