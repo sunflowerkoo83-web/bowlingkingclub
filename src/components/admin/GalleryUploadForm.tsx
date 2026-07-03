@@ -1,8 +1,9 @@
 "use client";
 
 import { useActionState, useRef } from "react";
+import { upload } from "@vercel/blob/client";
 import {
-  uploadGalleryImageAction,
+  addGalleryImageAction,
   type UploadState,
 } from "@/app/admin/(protected)/gallery/actions";
 import Button from "@/components/ui/Button";
@@ -14,7 +15,32 @@ export default function GalleryUploadForm() {
 
   const [state, formAction, isPending] = useActionState(
     async (prevState: UploadState, formData: FormData) => {
-      const result = await uploadGalleryImageAction(prevState, formData);
+      const file = formData.get("file");
+      const alt = formData.get("alt");
+
+      if (!(file instanceof File) || file.size === 0) {
+        return { error: "사진 파일을 선택해 주세요." };
+      }
+      if (typeof alt !== "string" || !alt.trim()) {
+        return { error: "사진 설명을 입력해 주세요." };
+      }
+
+      let blobUrl: string;
+      try {
+        const blob = await upload(`gallery/${Date.now()}-${file.name}`, file, {
+          access: "public",
+          handleUploadUrl: "/api/blob-upload",
+        });
+        blobUrl = blob.url;
+      } catch (error) {
+        console.error("[GalleryUploadForm] 업로드 실패:", error);
+        return { error: "업로드에 실패했습니다. 잠시 후 다시 시도해 주세요." };
+      }
+
+      formData.delete("file");
+      formData.set("url", blobUrl);
+
+      const result = await addGalleryImageAction(prevState, formData);
       if (!result.error) {
         formRef.current?.reset();
       }

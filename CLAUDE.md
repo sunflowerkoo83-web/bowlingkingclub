@@ -50,8 +50,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **인증**: 운영진 공용 비밀번호 1개(`ADMIN_PASSWORD`) + HMAC 서명 세션 쿠키(`src/lib/auth/session.ts`, `src/lib/auth/require-admin.ts`). 별도 인증 라이브러리 없이 Node `crypto`만 사용. Google 로그인 등 사용자별 인증은 도입하지 않음(운영진 수가 적어 과한 복잡도로 판단).
 - **라우트**: `/admin/login`(공개)과 `/admin`, `/admin/gallery`, `/admin/scores`, `/admin/community`(`(protected)` 라우트 그룹, `requireAdminSession()`으로 게이트) — 그룹명은 URL에 나타나지 않음.
 - **쓰기 경로는 전부 서버 액션**(`src/app/admin/(protected)/*/actions.ts`)이며, 각 액션 최상단에서 반드시 `requireAdminSession()`을 호출 — 서버 액션은 UI 없이도 직접 호출 가능한 엔드포인트이므로 페이지 보호만으로는 불충분.
-- **갤러리 사진**: 업로드 시 `@vercel/blob`의 `put()`으로 파일 저장 후 URL을 Firestore `gallery` 컬렉션에 기록 (`src/lib/firebase/gallery.ts`). 삭제 시 Firestore 문서와 Blob 파일을 함께 제거. 기존의 정적 `gallery-data.ts`는 제거됨 — 갤러리는 이제 전부 Firestore 기반.
-- **회원 프로필**: `src/lib/firebase/scores.ts`의 `upsertMember`/`deleteMember`로 `members` 컬렉션 직접 CRUD. 이름/에버리지/하이스코어 외에 사진, 구력, 볼링스타일, 평균 구속·RPM, 장점/단점/특이사항까지 관리 (`src/lib/types.ts`의 `Member` 타입 참고). 프로필 사진도 갤러리와 동일하게 Vercel Blob에 업로드.
+- **사진 업로드는 서버 액션을 거치지 않고 브라우저 → Vercel Blob 직접 업로드** (`upload()` from `@vercel/blob/client`, 토큰 발급은 `src/app/api/blob-upload/route.ts`의 `handleUpload`가 `isAdminAuthenticated()`로 게이트). Vercel 서버리스 함수의 요청 본문 제한(~4.5MB)에 걸려 큰 사진(특히 스마트폰 사진)이 조용히 실패하던 문제 때문에 이렇게 바꿈 — **새 업로드 기능을 추가할 때 파일을 서버 액션의 FormData로 직접 넘기지 말 것**, 항상 클라이언트에서 먼저 업로드해 URL만 서버 액션으로 전달해야 함. 업로드 후 URL을 Firestore에 기록하는 것만 서버 액션(`addGalleryImageAction`, `upsertMemberAction`)이 담당.
+- **갤러리 사진**: 업로드 URL을 Firestore `gallery` 컬렉션에 기록 (`src/lib/firebase/gallery.ts`). 삭제 시 Firestore 문서와 Blob 파일을 함께 제거. 기존의 정적 `gallery-data.ts`는 제거됨 — 갤러리는 이제 전부 Firestore 기반.
+- **회원 프로필**: `src/lib/firebase/scores.ts`의 `upsertMember`/`deleteMember`로 `members` 컬렉션 직접 CRUD. 이름/에버리지/하이스코어 외에 사진, 구력, 볼링스타일, 평균 구속·RPM, 장점/단점/특이사항까지 관리 (`src/lib/types.ts`의 `Member` 타입 참고).
 - 신규 환경변수: `ADMIN_PASSWORD`, `ADMIN_SESSION_SECRET`, `BLOB_READ_WRITE_TOKEN` (`.env.local.example` 참고).
 
 ## 커뮤니티 게시판 (`/community`)

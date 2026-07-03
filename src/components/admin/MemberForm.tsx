@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState, useRef } from "react";
+import { upload } from "@vercel/blob/client";
 import {
   upsertMemberAction,
   type MemberFormState,
@@ -71,6 +72,22 @@ export default function MemberForm({
 
   const [state, formAction, isPending] = useActionState(
     async (prevState: MemberFormState, formData: FormData) => {
+      const photoFile = formData.get("photo");
+
+      if (photoFile instanceof File && photoFile.size > 0) {
+        try {
+          const blob = await upload(`members/${Date.now()}-${photoFile.name}`, photoFile, {
+            access: "public",
+            handleUploadUrl: "/api/blob-upload",
+          });
+          formData.set("photoUrl", blob.url);
+        } catch (error) {
+          console.error("[MemberForm] 사진 업로드 실패:", error);
+          return { error: "사진 업로드에 실패했습니다. 잠시 후 다시 시도해 주세요." };
+        }
+      }
+      formData.delete("photo");
+
       const result = await upsertMemberAction(prevState, formData);
       if (!result.error) {
         if (member) {

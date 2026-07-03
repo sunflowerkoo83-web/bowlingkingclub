@@ -1,6 +1,5 @@
 "use server";
 
-import { put } from "@vercel/blob";
 import { revalidatePath } from "next/cache";
 import { requireAdminSession } from "@/lib/auth/require-admin";
 import { upsertMember, deleteMember, type MemberInput } from "@/lib/firebase/scores";
@@ -18,6 +17,9 @@ function parseText(value: FormDataEntryValue | null): string | undefined {
   return value.trim();
 }
 
+// 사진 파일은 클라이언트에서 Vercel Blob으로 직접 업로드된 뒤(src/app/api/blob-upload)
+// photoUrl만 이 액션으로 전달됨 — 서버리스 함수 요청 본문 제한(~4.5MB)을 피하기 위해
+// 파일 자체는 이 액션을 거치지 않음.
 export async function upsertMemberAction(
   _prevState: MemberFormState,
   formData: FormData
@@ -29,7 +31,7 @@ export async function upsertMemberAction(
   const average = parseNumber(formData.get("average"));
   const highScore = parseNumber(formData.get("highScore"));
   const existingPhotoUrl = formData.get("existingPhotoUrl");
-  const photoFile = formData.get("photo");
+  const newPhotoUrl = formData.get("photoUrl");
 
   if (typeof name !== "string" || !name.trim()) {
     return { error: "이름을 입력해 주세요." };
@@ -41,14 +43,10 @@ export async function upsertMemberAction(
     return { error: "하이스코어를 숫자로 입력해 주세요." };
   }
 
-  let photoUrl = typeof existingPhotoUrl === "string" && existingPhotoUrl ? existingPhotoUrl : undefined;
-
-  if (photoFile instanceof File && photoFile.size > 0) {
-    const blob = await put(`members/${Date.now()}-${photoFile.name}`, photoFile, {
-      access: "public",
-    });
-    photoUrl = blob.url;
-  }
+  const photoUrl =
+    (typeof newPhotoUrl === "string" && newPhotoUrl) ||
+    (typeof existingPhotoUrl === "string" && existingPhotoUrl) ||
+    undefined;
 
   const input: MemberInput = {
     id: typeof id === "string" && id ? id : undefined,
