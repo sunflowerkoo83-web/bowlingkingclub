@@ -16,3 +16,5 @@ export const BOWLING_CENTER = {
   phone: "02-6975-5329",
   address: "서울 은평구 통일로 1050 롯데몰 4층",
 };
+
+export const YOUTUBE_URL = "https://www.youtube.com/@Bowlingking-jjun";
