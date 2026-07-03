@@ -19,9 +19,7 @@ export default function Header() {
           onClick={() => setIsOpen(false)}
         >
           <Image src="/logo.png" alt={SITE_NAME_EN} width={36} height={36} priority />
-          <span className="font-display text-xl tracking-tight text-navy-900">
-            {SITE_NAME_EN}
-          </span>
+          <span className="text-lg text-navy-900">{SITE_NAME_EN}</span>
         </Link>
 
         <nav className="hidden md:flex md:items-center md:gap-1">

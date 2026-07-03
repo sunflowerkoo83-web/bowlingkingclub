@@ -59,7 +59,7 @@ export default function IntroSection() {
         <p className="text-center text-xs font-semibold uppercase tracking-[0.35em] text-gold-400">
           About BowlingKing
         </p>
-        <h2 className="font-serif mt-3 text-center text-2xl font-bold text-white sm:text-3xl">
+        <h2 className="mt-3 text-center text-2xl font-bold text-white sm:text-3xl">
           볼링킹을 소개합니다
         </h2>
         <p className="mx-auto mt-4 max-w-2xl text-center text-white/60">

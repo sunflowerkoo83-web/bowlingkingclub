@@ -28,9 +28,6 @@
   --color-gold-500: #cda44a;
   --color-gold-600: #ad8531;
   --color-gold: var(--color-gold-400);
-
-  --font-serif: var(--font-noto-serif-kr), serif;
-  --font-display: var(--font-playfair), serif;
 }
 
 body {

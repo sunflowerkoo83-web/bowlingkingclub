@@ -37,7 +37,7 @@ export default function Hero() {
           가인볼링장 은평점 · 볼링 동호회
         </p>
 
-        <h1 className="font-serif max-w-2xl text-4xl font-black leading-[1.15] tracking-tight text-white sm:text-5xl md:text-6xl">
+        <h1 className="max-w-2xl text-4xl font-black leading-[1.15] tracking-tight text-white sm:text-5xl md:text-6xl">
           함께 굴리고,
           <br />
           함께 성장하는 볼링킹
