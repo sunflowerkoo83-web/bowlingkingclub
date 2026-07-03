@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { NAV_LINKS, SITE_NAME } from "@/lib/constants";
+import { NAV_LINKS, SITE_NAME_EN } from "@/lib/constants";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,8 +18,8 @@ export default function Header() {
           className="flex items-center gap-2 font-bold text-navy-600"
           onClick={() => setIsOpen(false)}
         >
-          <Image src="/logo.png" alt={SITE_NAME} width={36} height={36} priority />
-          <span className="text-lg">{SITE_NAME}</span>
+          <Image src="/logo.png" alt={SITE_NAME_EN} width={36} height={36} priority />
+          <span className="text-lg">{SITE_NAME_EN}</span>
         </Link>
 
         <nav className="hidden md:flex md:items-center md:gap-1">
