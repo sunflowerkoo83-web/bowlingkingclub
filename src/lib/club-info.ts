@@ -2,8 +2,8 @@
 
 export const HISTORY: { year: string; description: string }[] = [
   { year: "2023", description: "볼링킹 동호회 창단" },
-  { year: "2024", description: "정기 모임 월 2회로 확대, 시즌별 랭킹 도입" },
-  { year: "2025", description: "회원 30명 돌파, 동호회 홈페이지 오픈" },
+  { year: "2024", description: "시즌별 랭킹 도입" },
+  { year: "2026", description: "동호회 홈페이지 오픈" },
 ];
 
 export const REGULAR_MEETING = {
