@@ -6,7 +6,7 @@ import ErrorState from "@/components/ui/ErrorState";
 import { getMemberScores } from "@/lib/firebase/scores";
 
 export const metadata: Metadata = {
-  title: "회원 프로필 | 볼링킹",
+  title: "Members | BowlingKing",
 };
 
 export const dynamic = "force-dynamic";
@@ -16,7 +16,7 @@ export default async function ScoresPage() {
 
   return (
     <Section>
-      <h1 className="text-3xl font-black text-navy-600 sm:text-4xl">회원 프로필</h1>
+      <h1 className="text-3xl font-black text-navy-600 sm:text-4xl">Members</h1>
       <p className="mt-3 max-w-2xl text-navy-600/80">
         볼링킹 회원들의 구력, 스타일, 기록을 소개합니다.
       </p>

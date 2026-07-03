@@ -6,7 +6,7 @@ import ErrorState from "@/components/ui/ErrorState";
 import { getGalleryImages } from "@/lib/firebase/gallery";
 
 export const metadata: Metadata = {
-  title: "갤러리 | 볼링킹",
+  title: "Gallery | BowlingKing",
 };
 
 export const dynamic = "force-dynamic";
@@ -16,7 +16,7 @@ export default async function GalleryPage() {
 
   return (
     <Section>
-      <h1 className="text-3xl font-black text-navy-600 sm:text-4xl">갤러리</h1>
+      <h1 className="text-3xl font-black text-navy-600 sm:text-4xl">Gallery</h1>
       <p className="mt-3 max-w-2xl text-navy-600/80">
         볼링킹 회원들의 활동 모습을 만나보세요.
       </p>
