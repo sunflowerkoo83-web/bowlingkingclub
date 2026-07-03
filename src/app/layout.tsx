@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Noto_Sans_KR, Inter } from "next/font/google";
+import { Noto_Sans_KR, Noto_Serif_KR, Playfair_Display, Inter } from "next/font/google";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import "./globals.css";
@@ -8,6 +8,19 @@ const notoSansKr = Noto_Sans_KR({
   variable: "--font-noto-sans-kr",
   subsets: ["latin"],
   weight: ["400", "500", "700", "900"],
+});
+
+const notoSerifKr = Noto_Serif_KR({
+  variable: "--font-noto-serif-kr",
+  subsets: ["latin"],
+  weight: ["500", "700", "900"],
+});
+
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+  weight: ["600", "700", "800", "900"],
+  style: ["normal", "italic"],
 });
 
 const inter = Inter({
@@ -28,7 +41,7 @@ export default function RootLayout({
   return (
     <html
       lang="ko"
-      className={`${notoSansKr.variable} ${inter.variable} h-full antialiased`}
+      className={`${notoSansKr.variable} ${notoSerifKr.variable} ${playfair.variable} ${inter.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans">
         <Header />

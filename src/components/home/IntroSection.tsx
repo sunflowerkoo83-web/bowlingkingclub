@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Section from "@/components/ui/Section";
-import Card from "@/components/ui/Card";
 
 const QUICK_LINKS = [
   {
@@ -55,37 +54,42 @@ const QUICK_LINKS = [
 
 export default function IntroSection() {
   return (
-    <Section>
-      <h2 className="text-center text-2xl font-bold text-navy-600 sm:text-3xl">
-        볼링킹을 소개합니다
-      </h2>
-      <p className="mx-auto mt-4 max-w-2xl text-center text-navy-600/80">
-        볼링킹은 신규 회원 모집부터 경기 일정 공유, 개인 기록 관리까지
-        회원 간 소통과 실력 향상을 함께 지원하는 온라인 허브를 지향합니다.
-      </p>
+    <div className="bg-navy-900">
+      <Section>
+        <p className="text-center text-xs font-semibold uppercase tracking-[0.35em] text-gold-400">
+          About BowlingKing
+        </p>
+        <h2 className="font-serif mt-3 text-center text-2xl font-bold text-white sm:text-3xl">
+          볼링킹을 소개합니다
+        </h2>
+        <p className="mx-auto mt-4 max-w-2xl text-center text-white/60">
+          볼링킹은 신규 회원 모집부터 경기 일정 공유, 개인 기록 관리까지
+          회원 간 소통과 실력 향상을 함께 지원하는 온라인 허브를 지향합니다.
+        </p>
 
-      <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {QUICK_LINKS.map((item) => (
-          <Link key={item.href} href={item.href} className="group block h-full">
-            <Card className="h-full transition-all duration-200 group-hover:-translate-y-1 group-hover:border-ember-100 group-hover:shadow-lg">
-              <div className="flex h-11 w-11 items-center justify-center rounded-full bg-ember-50 text-ember-600 transition-colors group-hover:bg-ember-600 group-hover:text-white">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth={1.5}
-                  className="h-5 w-5"
-                  aria-hidden="true"
-                >
-                  {item.icon}
-                </svg>
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {QUICK_LINKS.map((item) => (
+            <Link key={item.href} href={item.href} className="group block h-full">
+              <div className="h-full rounded-2xl border border-white/10 bg-white/5 p-6 transition-all duration-200 group-hover:-translate-y-1 group-hover:border-gold-400/40 group-hover:bg-white/[0.07]">
+                <div className="flex h-11 w-11 items-center justify-center rounded-full border border-gold-400/40 text-gold-400">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={1.5}
+                    className="h-5 w-5"
+                    aria-hidden="true"
+                  >
+                    {item.icon}
+                  </svg>
+                </div>
+                <h3 className="mt-4 font-bold text-white">{item.title}</h3>
+                <p className="mt-2 text-sm text-white/60">{item.description}</p>
               </div>
-              <h3 className="mt-4 font-bold text-navy-600">{item.title}</h3>
-              <p className="mt-2 text-sm text-navy-600/80">{item.description}</p>
-            </Card>
-          </Link>
-        ))}
-      </div>
-    </Section>
+            </Link>
+          ))}
+        </div>
+      </Section>
+    </div>
   );
 }

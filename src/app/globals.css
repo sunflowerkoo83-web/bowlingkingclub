@@ -22,6 +22,15 @@
   --color-ember-600: #ff6b35;
   --color-ember-700: #e2551f;
   --color-ember: var(--color-ember-600);
+
+  --color-gold-300: #f3e0ac;
+  --color-gold-400: #e0bf75;
+  --color-gold-500: #cda44a;
+  --color-gold-600: #ad8531;
+  --color-gold: var(--color-gold-400);
+
+  --font-serif: var(--font-noto-serif-kr), serif;
+  --font-display: var(--font-playfair), serif;
 }
 
 body {

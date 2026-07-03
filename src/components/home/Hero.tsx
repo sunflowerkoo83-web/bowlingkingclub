@@ -5,44 +5,51 @@ import { SITE_NAME, YOUTUBE_URL } from "@/lib/constants";
 export default function Hero() {
   return (
     <div className="relative isolate overflow-hidden bg-navy-900">
+      <Image
+        src="/hero-bg.jpg"
+        alt=""
+        fill
+        priority
+        className="object-cover opacity-40"
+      />
       <div
-        className="pointer-events-none absolute left-1/2 top-0 h-[120%] w-[120%] -translate-x-1/2 -translate-y-1/4 rounded-full bg-gradient-to-br from-ember-600/30 via-navy-600/20 to-transparent blur-3xl"
+        className="absolute inset-0 bg-gradient-to-b from-navy-900/85 via-navy-900/90 to-navy-900"
+        aria-hidden="true"
+      />
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold-400/60 to-transparent"
         aria-hidden="true"
       />
 
-      <svg className="absolute inset-0 h-full w-full opacity-[0.07]" aria-hidden="true">
-        <pattern id="bowling-pattern" width="64" height="64" patternUnits="userSpaceOnUse">
-          <circle cx="14" cy="14" r="3" fill="white" />
-          <circle cx="46" cy="34" r="3" fill="white" />
-          <circle cx="14" cy="54" r="3" fill="white" />
-        </pattern>
-        <rect width="100%" height="100%" fill="url(#bowling-pattern)" />
-      </svg>
-
-      <div className="relative mx-auto flex max-w-5xl flex-col items-center gap-7 px-4 py-24 text-center sm:px-6 md:py-32 lg:px-8">
-        <div className="rounded-full bg-white/10 p-3 ring-1 ring-white/15 backdrop-blur">
+      <div className="relative mx-auto flex max-w-5xl flex-col items-center gap-6 px-4 py-24 text-center sm:px-6 md:py-32 lg:px-8">
+        <div className="rounded-full border border-gold-400/40 bg-white/5 p-3 backdrop-blur">
           <Image
             src="/logo.png"
             alt={SITE_NAME}
-            width={88}
-            height={88}
+            width={80}
+            height={80}
             priority
             className="rounded-full"
           />
         </div>
 
-        <span className="rounded-full border border-white/20 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-white/75">
+        <p className="text-xs font-semibold uppercase tracking-[0.35em] text-gold-400">
           가인볼링장 은평점 · 볼링 동호회
-        </span>
+        </p>
 
-        <h1 className="max-w-2xl text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl md:text-6xl">
-          함께 굴리고, 함께 성장하는 볼링킹
+        <h1 className="font-serif max-w-2xl text-4xl font-black leading-[1.15] tracking-tight text-white sm:text-5xl md:text-6xl">
+          함께 굴리고,
+          <br />
+          함께 성장하는 볼링킹
         </h1>
-        <p className="max-w-xl text-base leading-relaxed text-white/75 sm:text-lg">
+
+        <div className="h-px w-16 bg-gold-400/50" aria-hidden="true" />
+
+        <p className="max-w-xl text-base leading-relaxed text-white/70 sm:text-lg">
           정기 모임과 경기, 서로의 실력 향상을 응원하는 따뜻한 커뮤니티에 함께해요.
         </p>
 
-        <div className="mt-2 flex flex-wrap items-center justify-center gap-3">
+        <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
           <LinkButton href="/join" variant="primary">
             가입 문의하기
           </LinkButton>
