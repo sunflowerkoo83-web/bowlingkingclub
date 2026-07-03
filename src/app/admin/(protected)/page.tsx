@@ -14,8 +14,8 @@ const SECTIONS = [
   },
   {
     href: "/admin/scores",
-    title: "점수 관리",
-    description: "회원별 에버리지/하이스코어를 추가·수정·삭제합니다.",
+    title: "회원 프로필 관리",
+    description: "회원 사진, 구력, 스타일, 기록 등을 추가·수정·삭제합니다.",
   },
 ];
 

@@ -4,7 +4,7 @@ import { logoutAction } from "@/app/admin/login/actions";
 const ADMIN_LINKS = [
   { href: "/admin", label: "대시보드" },
   { href: "/admin/gallery", label: "갤러리 관리" },
-  { href: "/admin/scores", label: "점수 관리" },
+  { href: "/admin/scores", label: "회원 프로필 관리" },
 ];
 
 export default function AdminNav() {

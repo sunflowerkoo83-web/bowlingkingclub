@@ -28,7 +28,7 @@ let firestore: Firestore | undefined;
 export function getAdminFirestore(): Firestore {
   if (!firestore) {
     firestore = getFirestore(getAdminApp());
-    // gamesPlayed 등 선택 필드가 비어있을 때 undefined로 전달되므로 허용
+    // 구력/볼링스타일 등 선택 필드가 비어있을 때 undefined로 전달되므로 허용
     firestore.settings({ ignoreUndefinedProperties: true });
   }
   return firestore;

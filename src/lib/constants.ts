@@ -7,7 +7,7 @@ export const NAV_LINKS: NavLink[] = [
   { href: "/", label: "홈" },
   { href: "/about", label: "소개" },
   { href: "/gallery", label: "갤러리" },
-  { href: "/scores", label: "점수 기록" },
+  { href: "/scores", label: "회원 프로필" },
   { href: "/join", label: "가입 문의" },
 ];
 

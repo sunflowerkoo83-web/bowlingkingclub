@@ -15,8 +15,8 @@ const QUICK_LINKS = [
   },
   {
     href: "/scores",
-    title: "회원 점수 기록",
-    description: "회원별 에버리지와 하이스코어를 확인할 수 있어요.",
+    title: "회원 프로필",
+    description: "회원별 구력, 스타일, 에버리지와 하이스코어를 확인할 수 있어요.",
   },
 ];
 

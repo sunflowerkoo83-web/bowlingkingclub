@@ -36,7 +36,7 @@ export default function MemberManageTable({ members }: { members: Member[] }) {
               <p className="font-semibold text-navy-600">{member.name}</p>
               <p className="text-sm text-navy-600/70">
                 에버리지 {member.average} · 하이스코어 {member.highScore}
-                {member.gamesPlayed !== undefined ? ` · ${member.gamesPlayed}게임` : ""}
+                {member.bowlingStyle ? ` · ${member.bowlingStyle}` : ""}
               </p>
             </div>
             <div className="flex shrink-0 gap-2">

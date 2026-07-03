@@ -5,7 +5,7 @@ import ErrorState from "@/components/ui/ErrorState";
 import { getMemberScores } from "@/lib/firebase/scores";
 
 export const metadata: Metadata = {
-  title: "점수 관리 | 볼링킹",
+  title: "회원 프로필 관리 | 볼링킹",
 };
 
 export const dynamic = "force-dynamic";
@@ -16,7 +16,7 @@ export default async function AdminScoresPage() {
 
   return (
     <div>
-      <h1 className="text-2xl font-black text-navy-600">점수 관리</h1>
+      <h1 className="text-2xl font-black text-navy-600">회원 프로필 관리</h1>
 
       <div className="mt-6 rounded-2xl border border-navy-100 p-6">
         <h2 className="mb-4 font-bold text-navy-600">회원 추가</h2>

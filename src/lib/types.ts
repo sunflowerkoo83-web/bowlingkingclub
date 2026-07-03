@@ -1,9 +1,16 @@
 export type Member = {
   id: string;
   name: string;
-  average: number;
-  highScore: number;
-  gamesPlayed?: number;
+  photoUrl?: string;
+  experience?: string; // 구력
+  average: number; // 에버
+  bowlingStyle?: string; // 볼링스타일
+  avgBallSpeed?: number; // 평균 구속 (km/h)
+  avgRpm?: number; // 평균 RPM
+  highScore: number; // 하이점수
+  strengths?: string; // 장점
+  weaknesses?: string; // 단점
+  notes?: string; // 특이사항
 };
 
 export type GalleryImage = {

@@ -12,9 +12,16 @@ export type ScoresResult =
 export type MemberInput = {
   id?: string;
   name: string;
+  photoUrl?: string;
+  experience?: string;
   average: number;
+  bowlingStyle?: string;
+  avgBallSpeed?: number;
+  avgRpm?: number;
   highScore: number;
-  gamesPlayed?: number;
+  strengths?: string;
+  weaknesses?: string;
+  notes?: string;
 };
 
 export async function getMemberScores(): Promise<ScoresResult> {
@@ -33,9 +40,16 @@ export async function getMemberScores(): Promise<ScoresResult> {
       return {
         id: doc.id,
         name: data.name ?? "이름 없음",
+        photoUrl: data.photoUrl,
+        experience: data.experience,
         average: data.average ?? 0,
+        bowlingStyle: data.bowlingStyle,
+        avgBallSpeed: data.avgBallSpeed,
+        avgRpm: data.avgRpm,
         highScore: data.highScore ?? 0,
-        gamesPlayed: data.gamesPlayed,
+        strengths: data.strengths,
+        weaknesses: data.weaknesses,
+        notes: data.notes,
       };
     });
 

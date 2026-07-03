@@ -17,7 +17,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "볼링킹 | BowlingKing",
-  description: "볼링 동호회 볼링킹의 공식 홈페이지 — 소개, 갤러리, 회원 점수 기록, 가입 문의",
+  description: "볼링 동호회 볼링킹의 공식 홈페이지 — 소개, 갤러리, 회원 프로필, 가입 문의",
 };
 
 export default function RootLayout({
