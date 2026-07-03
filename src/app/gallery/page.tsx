@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import Section from "@/components/ui/Section";
 import GalleryGrid from "@/components/gallery/GalleryGrid";
 import YouTubeEmbed from "@/components/gallery/YouTubeEmbed";
+import VideoGrid from "@/components/gallery/VideoGrid";
 import EmptyState from "@/components/ui/EmptyState";
 import ErrorState from "@/components/ui/ErrorState";
 import { getGalleryImages } from "@/lib/firebase/gallery";
+import { getChannelVideos } from "@/lib/youtube";
 
 export const metadata: Metadata = {
   title: "Gallery | BowlingKing",
@@ -13,7 +15,7 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 
 export default async function GalleryPage() {
-  const result = await getGalleryImages();
+  const [result, videos] = await Promise.all([getGalleryImages(), getChannelVideos()]);
 
   return (
     <Section>
@@ -25,6 +27,11 @@ export default async function GalleryPage() {
       <div className="mt-10">
         <h2 className="mb-4 font-bold text-navy-600">영상</h2>
         <YouTubeEmbed />
+        {videos.length > 0 && (
+          <div className="mt-4">
+            <VideoGrid videos={videos} />
+          </div>
+        )}
       </div>
 
       <div className="mt-10">
