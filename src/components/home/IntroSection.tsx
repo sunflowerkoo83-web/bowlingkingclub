@@ -18,6 +18,11 @@ const QUICK_LINKS = [
     title: "회원 프로필",
     description: "회원별 구력, 스타일, 에버리지와 하이스코어를 확인할 수 있어요.",
   },
+  {
+    href: "/community",
+    title: "커뮤니티",
+    description: "자유롭게 글을 남기고 회원들과 이야기를 나눠보세요.",
+  },
 ];
 
 export default function IntroSection() {
@@ -31,7 +36,7 @@ export default function IntroSection() {
         회원 간 소통과 실력 향상을 함께 지원하는 온라인 허브를 지향합니다.
       </p>
 
-      <div className="mt-10 grid gap-4 sm:grid-cols-3">
+      <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {QUICK_LINKS.map((item) => (
           <Link key={item.href} href={item.href} className="block h-full">
             <Card className="h-full transition-shadow hover:shadow-md">

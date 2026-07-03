@@ -23,3 +23,11 @@ export type NavLink = {
   href: string;
   label: string;
 };
+
+export type Post = {
+  id: string;
+  name: string;
+  title: string;
+  content: string;
+  createdAt: string;
+};

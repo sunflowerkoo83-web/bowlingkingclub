@@ -23,13 +23,14 @@ function getAdminApp(): App {
   });
 }
 
-let firestore: Firestore | undefined;
-
 export function getAdminFirestore(): Firestore {
-  if (!firestore) {
-    firestore = getFirestore(getAdminApp());
+  const firestore = getFirestore(getAdminApp());
+  try {
     // 구력/볼링스타일 등 선택 필드가 비어있을 때 undefined로 전달되므로 허용
+    // Turbopack 등에서 이 모듈이 여러 번 평가되면 settings()가 중복 호출될 수 있어 무시
     firestore.settings({ ignoreUndefinedProperties: true });
+  } catch {
+    // 이미 설정된 경우
   }
   return firestore;
 }

@@ -17,6 +17,11 @@ const SECTIONS = [
     title: "회원 프로필 관리",
     description: "회원 사진, 구력, 스타일, 기록 등을 추가·수정·삭제합니다.",
   },
+  {
+    href: "/admin/community",
+    title: "게시판 관리",
+    description: "회원들이 자유롭게 쓴 글을 확인하고 스팸/부적절한 글을 삭제합니다.",
+  },
 ];
 
 export default function AdminDashboardPage() {

@@ -8,6 +8,7 @@ export const NAV_LINKS: NavLink[] = [
   { href: "/about", label: "About" },
   { href: "/gallery", label: "Gallery" },
   { href: "/scores", label: "Members" },
+  { href: "/community", label: "Community" },
   { href: "/join", label: "Join" },
 ];
 

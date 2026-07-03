@@ -5,6 +5,7 @@ const ADMIN_LINKS = [
   { href: "/admin", label: "대시보드" },
   { href: "/admin/gallery", label: "갤러리 관리" },
   { href: "/admin/scores", label: "회원 프로필 관리" },
+  { href: "/admin/community", label: "게시판 관리" },
 ];
 
 export default function AdminNav() {
