@@ -61,7 +61,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 | `/about` | 동호회 소개 / 모집 안내 |
 | `/gallery` | 활동 사진 갤러리 |
 | `/scores` | 회원 점수 기록 (Firestore 연동) |
-| `/join` | 가입 문의 (은평가인볼링센터 연락처 안내) |
+| `/join` | 가입 문의 (가인볼링장 은평점 연락처 안내) |
 | `/schedule`, `/schedule/{id}` | (확장) 경기 일정 목록 / 상세 |
 | `/community` | (확장) 공지 / 자유글 |
 | `/admin` | (확장) 관리자 페이지 |

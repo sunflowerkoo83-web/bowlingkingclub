@@ -13,7 +13,7 @@ export default function AboutPage() {
     <Section>
       <h1 className="text-3xl font-black text-navy-600 sm:text-4xl">동호회 소개</h1>
       <p className="mt-3 max-w-2xl text-navy-600/80">
-        볼링킹은 은평가인볼링센터를 중심으로 활동하는 볼링 동호회입니다.
+        볼링킹은 가인볼링장 은평점을 중심으로 활동하는 볼링 동호회입니다.
         누구나 즐겁게 볼링을 배우고 함께 실력을 쌓아갈 수 있어요.
       </p>
 

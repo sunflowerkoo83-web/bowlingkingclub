@@ -35,7 +35,7 @@ export default function Hero() {
           함께 굴리고, 함께 성장하는 볼링킹
         </h1>
         <p className="max-w-xl text-base text-white/90 sm:text-lg">
-          은평가인볼링센터를 중심으로 활동하는 볼링 동호회, 볼링킹입니다.
+          가인볼링장 은평점을 중심으로 활동하는 볼링 동호회, 볼링킹입니다.
           정기 모임과 경기, 서로의 실력 향상을 응원하는 따뜻한 커뮤니티에 함께해요.
         </p>
         <LinkButton href="/join" variant="primary" className="mt-2">

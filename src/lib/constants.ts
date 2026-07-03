@@ -11,9 +11,8 @@ export const NAV_LINKS: NavLink[] = [
   { href: "/join", label: "가입 문의" },
 ];
 
-// TODO: 실제 은평가인볼링센터 연락처(전화번호)로 교체해 주세요.
 export const BOWLING_CENTER = {
-  name: "은평가인볼링센터",
-  phone: "02-000-0000",
-  address: "서울특별시 은평구 (상세 주소 입력 필요)",
+  name: "가인볼링장 은평점",
+  phone: "02-6975-5329",
+  address: "서울 은평구 통일로 1050 롯데몰 4층",
 };
