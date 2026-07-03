@@ -30,10 +30,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 디자인
 
-- 메인 컬러: 네이비 `#1e3a5f` + 오렌지 `#ff6b35` (Tailwind 유틸리티명: `navy` / `ember`, `src/app/globals.css`의 `@theme` 블록에 정의)
-- 키워드: 역동적, 친근함, 깔끔함
-- 폰트: Noto Sans KR(본고딕 계열) / Inter(영문)
-- 다크모드 고려
+- 메인 컬러: 네이비 `#1e3a5f` + 오렌지 `#ff6b35` + 골드 포인트(`gold-300~600`, `#e0bf75` 계열) (Tailwind 유틸리티명: `navy` / `ember` / `gold`, `src/app/globals.css`의 `@theme` 블록에 정의)
+- 각 공개 페이지 상단은 공용 `src/components/ui/PageHeader.tsx`(다크 네이비 배경 + 골드 eyebrow + 흰 제목)로 통일 — 새 공개 페이지 추가 시 이 패턴을 따를 것. 본문 영역은 가독성을 위해 밝은 배경 유지, 관리자 페이지는 이 톤을 적용하지 않음.
+- 키워드: 역동적, 친근함, 고급스러움
+- 폰트: Noto Sans KR(본고딕 계열) / Inter(영문) — 세리프 폰트는 시도했다가 피드백으로 되돌림, 고딕체로 통일 유지
 
 ## 아키텍처 메모 (Next.js 16 관련)
 
@@ -61,6 +61,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - 기본적인 스팸 방지: 숨겨진 허니팟 필드(`website`, 사람 눈에는 안 보이지만 봇은 채우는 경우가 많음)와 글자 수 제한만 적용. reCAPTCHA 등 외부 서비스는 도입하지 않음.
 - 모더레이션은 운영진 전용 `/admin/community`에서 삭제만 가능 (수정 기능 없음) — `src/lib/firebase/posts.ts`의 `deletePost`.
 - 삭제 외 쓰기(작성)는 인증 없이 열려 있다는 점을 항상 염두에 둘 것 — 이 라우트에 새 서버 액션을 추가할 때 `requireAdminSession()`을 실수로 빼먹지 않도록 주의(반대로 `createPostAction`에는 의도적으로 없음).
+- **공지사항**: 자유게시판과 달리 **운영진만 작성 가능** — `/community` 상단에 고정 노출, `/admin/community`에서 작성/삭제 (`src/lib/firebase/notices.ts`의 `addNotice`/`deleteNotice`, `createNoticeAction`/`deleteNoticeAction`은 자유게시판 액션과 같은 파일 `src/app/admin/(protected)/community/actions.ts`에 위치, 둘 다 `requireAdminSession()` 필수).
 
 ## 기능 (기획서 기준, 우선순위순)
 
@@ -68,8 +69,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 2. 🔴 경기 일정 관리 (캘린더/리스트 뷰, 결과 입력, 레인 배정)
 3. 🔴 통계 대시보드 (개인 점수 추이, 평균, 랭킹, 스트라이크/스페어율)
 4. 🟡 회원 프로필 (사진, 볼링 이력, 장비, 개인 통계) — `/scores`에서 구현 완료
-5. 🟡 커뮤니티 (자유게시판) — `/community`에서 구현 완료 (공지사항 고정/갤러리 통합은 미구현)
-6. 🟢 관리자 기능 (회원 관리, 경기 데이터 입력, 공지 작성) — 회원 프로필/갤러리/게시판 관리는 구현 완료, 공지 작성 별도 기능은 없음
+5. 🟡 커뮤니티 (공지사항 + 자유게시판) — `/community`에서 구현 완료 (갤러리 통합은 미구현, 갤러리는 별도 `/gallery`)
+6. 🟢 관리자 기능 (회원 관리, 경기 데이터 입력, 공지 작성) — 회원 프로필/갤러리/게시판/공지사항 관리 모두 구현 완료
 
 > MVP 범위(메인/소개/갤러리/회원 프로필/가입 문의) + 커뮤니티 게시판까지 구현 완료. 경기 일정 관리는 다음 단계 과제.
 
@@ -81,7 +82,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 | `/about` | 동호회 소개 / 모집 안내 |
 | `/gallery` | 활동 사진 갤러리 (Firestore + Vercel Blob) + 유튜브 재생목록/영상 그리드 |
 | `/scores` | 회원 프로필 (사진/구력/스타일/기록, Firestore + Vercel Blob 연동) |
-| `/community` | 자유게시판 (로그인 없이 누구나 작성, Firestore 연동) |
+| `/community` | 공지사항(운영진 작성, 고정 노출) + 자유게시판(로그인 없이 누구나 작성), Firestore 연동 |
 | `/join` | 가입 문의 (가인볼링장 은평점 연락처 안내) |
 | `/admin`, `/admin/gallery`, `/admin/scores`, `/admin/community` | 운영진 전용 관리 페이지 (비밀번호 로그인) |
 | `/schedule`, `/schedule/{id}` | (확장) 경기 일정 목록 / 상세 |
