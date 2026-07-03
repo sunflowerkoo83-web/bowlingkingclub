@@ -18,3 +18,5 @@ export const BOWLING_CENTER = {
 };
 
 export const YOUTUBE_URL = "https://www.youtube.com/@Bowlingking-jjun";
+// 채널 UC ID(UCUfU44CQ5obQAqSFgdjT7zw)의 "UC"를 "UU"로 바꾸면 업로드 전체 재생목록 ID가 됨
+export const YOUTUBE_UPLOADS_PLAYLIST_ID = "UUUfU44CQ5obQAqSFgdjT7zw";

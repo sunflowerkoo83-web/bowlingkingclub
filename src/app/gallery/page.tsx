@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Section from "@/components/ui/Section";
 import GalleryGrid from "@/components/gallery/GalleryGrid";
+import YouTubeEmbed from "@/components/gallery/YouTubeEmbed";
 import EmptyState from "@/components/ui/EmptyState";
 import ErrorState from "@/components/ui/ErrorState";
 import { getGalleryImages } from "@/lib/firebase/gallery";
@@ -22,6 +23,12 @@ export default async function GalleryPage() {
       </p>
 
       <div className="mt-10">
+        <h2 className="mb-4 font-bold text-navy-600">영상</h2>
+        <YouTubeEmbed />
+      </div>
+
+      <div className="mt-10">
+        <h2 className="mb-4 font-bold text-navy-600">사진</h2>
         {result.status === "ok" && <GalleryGrid images={result.images} />}
         {result.status === "empty" && (
           <EmptyState
