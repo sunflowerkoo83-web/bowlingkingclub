@@ -7,7 +7,7 @@ export const HISTORY: { year: string; description: string }[] = [
 ];
 
 export const REGULAR_MEETING = {
-  frequency: "매월 둘째·넷째 주 토요일",
-  time: "오후 2시 ~ 5시",
+  frequency: "1·3·5주 화요일 / 2·4주 수요일",
+  time: "19:30",
   note: "정확한 일정은 공지사항을 통해 별도 안내됩니다.",
 };

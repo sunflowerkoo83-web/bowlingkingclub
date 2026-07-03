@@ -6,7 +6,7 @@ const QUICK_LINKS = [
   {
     href: "/about",
     title: "동호회 소개",
-    description: "볼링킹의 연혁, 활동 장소, 정기 모임 일정을 확인하세요.",
+    description: "볼링킹의 연혁, 활동 장소, 정기전 일정을 확인하세요.",
   },
   {
     href: "/gallery",

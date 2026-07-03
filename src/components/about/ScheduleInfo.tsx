@@ -4,7 +4,7 @@ import { REGULAR_MEETING } from "@/lib/club-info";
 export default function ScheduleInfo() {
   return (
     <Card>
-      <h2 className="text-2xl font-bold text-navy-600">정기 모임 일정</h2>
+      <h2 className="text-2xl font-bold text-navy-600">정기전 일정</h2>
       <dl className="mt-4 space-y-2 text-navy-600/90">
         <div className="flex gap-2">
           <dt className="font-semibold">주기</dt>
