@@ -15,6 +15,18 @@ const QUICK_LINKS = [
     ),
   },
   {
+    href: "/notices",
+    title: "공지사항",
+    description: "운영진이 전하는 소식과 안내를 확인하세요.",
+    icon: (
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M14.857 17.082a23.85 23.85 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"
+      />
+    ),
+  },
+  {
     href: "/gallery",
     title: "갤러리",
     description: "회원들의 생생한 활동 모습을 사진으로 만나보세요.",
@@ -67,7 +79,7 @@ export default function IntroSection() {
           회원 간 소통과 실력 향상을 함께 지원하는 온라인 허브를 지향합니다.
         </p>
 
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
           {QUICK_LINKS.map((item) => (
             <Link key={item.href} href={item.href} className="group block h-full">
               <div className="h-full rounded-2xl border border-white/10 bg-white/5 p-6 transition-all duration-200 group-hover:-translate-y-1 group-hover:border-gold-400/40 group-hover:bg-white/[0.07]">

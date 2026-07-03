@@ -6,6 +6,7 @@ export const SITE_NAME_EN = "BowlingKing";
 export const NAV_LINKS: NavLink[] = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
+  { href: "/notices", label: "Notices" },
   { href: "/gallery", label: "Gallery" },
   { href: "/scores", label: "Members" },
   { href: "/community", label: "Community" },

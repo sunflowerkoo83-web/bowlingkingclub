@@ -61,7 +61,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - 기본적인 스팸 방지: 숨겨진 허니팟 필드(`website`, 사람 눈에는 안 보이지만 봇은 채우는 경우가 많음)와 글자 수 제한만 적용. reCAPTCHA 등 외부 서비스는 도입하지 않음.
 - 모더레이션은 운영진 전용 `/admin/community`에서 삭제만 가능 (수정 기능 없음) — `src/lib/firebase/posts.ts`의 `deletePost`.
 - 삭제 외 쓰기(작성)는 인증 없이 열려 있다는 점을 항상 염두에 둘 것 — 이 라우트에 새 서버 액션을 추가할 때 `requireAdminSession()`을 실수로 빼먹지 않도록 주의(반대로 `createPostAction`에는 의도적으로 없음).
-- **공지사항**: 자유게시판과 달리 **운영진만 작성 가능** — `/community` 상단에 고정 노출, `/admin/community`에서 작성/삭제 (`src/lib/firebase/notices.ts`의 `addNotice`/`deleteNotice`, `createNoticeAction`/`deleteNoticeAction`은 자유게시판 액션과 같은 파일 `src/app/admin/(protected)/community/actions.ts`에 위치, 둘 다 `requireAdminSession()` 필수).
+- **공지사항은 `/community`가 아니라 별도 `/notices` 페이지**(자유게시판과 달리 **운영진만 작성 가능**, 읽기 전용 공개 페이지). 다만 관리(작성/삭제)는 함께 `/admin/community`에서 처리 — `src/lib/firebase/notices.ts`의 `addNotice`/`deleteNotice`, `createNoticeAction`/`deleteNoticeAction`은 자유게시판 액션과 같은 파일 `src/app/admin/(protected)/community/actions.ts`에 위치, 둘 다 `requireAdminSession()` 필수.
 
 ## 기능 (기획서 기준, 우선순위순)
 
@@ -80,9 +80,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 |---|---|
 | `/` | 메인 홈 |
 | `/about` | 동호회 소개 / 모집 안내 |
+| `/notices` | 공지사항 (운영진 작성, 읽기 전용, Firestore 연동) — 내비게이션 순서상 About 바로 다음 |
 | `/gallery` | 활동 사진 갤러리 (Firestore + Vercel Blob) + 유튜브 재생목록/영상 그리드 |
 | `/scores` | 회원 프로필 (사진/구력/스타일/기록, Firestore + Vercel Blob 연동) |
-| `/community` | 공지사항(운영진 작성, 고정 노출) + 자유게시판(로그인 없이 누구나 작성), Firestore 연동 |
+| `/community` | 자유게시판 (로그인 없이 누구나 작성), Firestore 연동 |
 | `/join` | 가입 문의 (가인볼링장 은평점 연락처 안내) |
 | `/admin`, `/admin/gallery`, `/admin/scores`, `/admin/community` | 운영진 전용 관리 페이지 (비밀번호 로그인) |
 | `/schedule`, `/schedule/{id}` | (확장) 경기 일정 목록 / 상세 |
