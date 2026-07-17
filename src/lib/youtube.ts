@@ -16,10 +16,18 @@ function decodeXmlEntities(text: string): string {
     .replace(/&#39;/g, "'");
 }
 
-// 유튜브 RSS 피드가 채널당 간헐적으로 200 상태코드에 404 에러 페이지 본문을 실어 보내는 경우가 있어
-// (실제 XML이 아닌 HTML 응답), 정상 XML을 받을 때까지 최대 3회 재시도
-async function fetchFeedXml(retries = 3): Promise<string | null> {
+function delay(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+// 유튜브 RSS 피드가 채널당 간헐적으로(체감상 30~50% 확률) 200 상태코드에
+// 404 에러 페이지 본문을 실어 보내는 경우가 있어(실제 XML이 아닌 HTML 응답),
+// 정상 XML을 받을 때까지 재시도. 연달아 같은 실패를 겪는 경우가 있어
+// 시도 사이에 짧은 지연을 둠
+async function fetchFeedXml(retries = 5): Promise<string | null> {
   for (let attempt = 0; attempt < retries; attempt++) {
+    if (attempt > 0) await delay(300 * attempt);
+
     try {
       const res = await fetch(
         `https://www.youtube.com/feeds/videos.xml?channel_id=${YOUTUBE_CHANNEL_ID}`,
