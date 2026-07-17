@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 
 export default async function GalleryPage() {
-  const [result, videos] = await Promise.all([getGalleryImages(), getChannelVideos()]);
+  const [result, videos] = await Promise.all([getGalleryImages(), getChannelVideos(9)]);
 
   return (
     <>
