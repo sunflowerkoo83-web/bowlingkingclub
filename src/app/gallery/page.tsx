@@ -17,6 +17,7 @@ export const dynamic = "force-dynamic";
 
 export default async function GalleryPage() {
   const [result, videos] = await Promise.all([getGalleryImages(), getChannelVideos(5)]);
+  const [featuredVideo, ...restVideos] = videos;
 
   return (
     <>
@@ -28,10 +29,10 @@ export default async function GalleryPage() {
       <Section>
         <div>
           <h2 className="mb-4 font-bold text-navy-600">영상</h2>
-          <YouTubeEmbed />
-          {videos.length > 0 && (
+          {featuredVideo && <YouTubeEmbed videoId={featuredVideo.videoId} />}
+          {restVideos.length > 0 && (
             <div className="mt-4">
-              <VideoGrid videos={videos} />
+              <VideoGrid videos={restVideos} />
             </div>
           )}
         </div>

@@ -23,5 +23,3 @@ export const BAND_URL = "https://www.band.us/band/93204873/post";
 
 export const YOUTUBE_URL = "https://www.youtube.com/@Bowlingking-jjun";
 export const YOUTUBE_CHANNEL_ID = "UCUfU44CQ5obQAqSFgdjT7zw";
-// 채널 UC ID의 "UC"를 "UU"로 바꾸면 업로드 전체 재생목록 ID가 됨
-export const YOUTUBE_UPLOADS_PLAYLIST_ID = "UUUfU44CQ5obQAqSFgdjT7zw";
