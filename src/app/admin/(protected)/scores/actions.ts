@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { requireAdminSession } from "@/lib/auth/require-admin";
-import { upsertMember, deleteMember, type MemberInput } from "@/lib/firebase/scores";
+import { upsertMember, deleteMember, reorderMembers, type MemberInput } from "@/lib/firebase/scores";
 
 export type MemberFormState = { error?: string };
 
@@ -78,6 +78,15 @@ export async function deleteMemberAction(formData: FormData): Promise<void> {
   if (typeof id !== "string" || !id) return;
 
   await deleteMember(id);
+
+  revalidatePath("/scores");
+  revalidatePath("/admin/scores");
+}
+
+export async function reorderMembersAction(orderedIds: string[]): Promise<void> {
+  await requireAdminSession();
+
+  await reorderMembers(orderedIds);
 
   revalidatePath("/scores");
   revalidatePath("/admin/scores");

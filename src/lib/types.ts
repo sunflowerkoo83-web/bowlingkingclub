@@ -11,6 +11,7 @@ export type Member = {
   strengths?: string; // 장점
   weaknesses?: string; // 단점
   notes?: string; // 특이사항
+  order?: number; // 표시 순서 (관리자가 수동 지정, 없으면 에버리지 내림차순)
 };
 
 export type GalleryImage = {
