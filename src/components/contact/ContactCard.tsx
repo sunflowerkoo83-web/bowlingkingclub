@@ -1,5 +1,5 @@
 import Card from "@/components/ui/Card";
-import { BOWLING_CENTER, BAND_URL } from "@/lib/constants";
+import { BOWLING_CENTER, BAND_URL, KAKAO_ID } from "@/lib/constants";
 
 export default function ContactCard() {
   return (
@@ -27,6 +27,9 @@ export default function ContactCard() {
         >
           네이버 밴드에서 만나기
         </a>
+        <div className="flex min-h-[44px] items-center justify-center gap-2 rounded-full bg-[#FEE500] px-6 font-semibold text-[#3C1E1E]">
+          카카오톡 ID: {KAKAO_ID}
+        </div>
         <p className="text-sm text-navy-600/70">{BOWLING_CENTER.address}</p>
       </div>
     </Card>

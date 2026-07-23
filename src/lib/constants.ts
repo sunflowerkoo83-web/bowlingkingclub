@@ -21,5 +21,7 @@ export const BOWLING_CENTER = {
 
 export const BAND_URL = "https://www.band.us/band/93204873/post";
 
+export const KAKAO_ID = "koojjang83";
+
 export const YOUTUBE_URL = "https://www.youtube.com/@Bowlingking-jjun";
 export const YOUTUBE_CHANNEL_ID = "UCUfU44CQ5obQAqSFgdjT7zw";
