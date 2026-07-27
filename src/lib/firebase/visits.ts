@@ -19,23 +19,21 @@ export async function recordVisit(dateKey: string): Promise<void> {
 export type DailyVisit = { date: string; count: number };
 
 export async function getRecentVisitStats(days: number): Promise<DailyVisit[]> {
-  const snapshot = await getAdminFirestore()
-    .collection(COLLECTION)
-    .orderBy("__name__", "desc")
-    .limit(days)
-    .get();
-
-  const byDate = new Map(
-    snapshot.docs.map((doc) => [doc.id, (doc.data().count as number) ?? 0])
-  );
-
-  const result: DailyVisit[] = [];
+  const db = getAdminFirestore();
   const today = new Date();
+  const keys: string[] = [];
   for (let i = days - 1; i >= 0; i -= 1) {
     const date = new Date(today);
     date.setDate(date.getDate() - i);
-    const key = visitDateKey(date);
-    result.push({ date: key, count: byDate.get(key) ?? 0 });
+    keys.push(visitDateKey(date));
   }
-  return result;
+
+  // 날짜 키를 미리 알고 있으므로 orderBy 대신 직접 문서를 조회해 색인 없이 동작
+  const refs = keys.map((key) => db.collection(COLLECTION).doc(key));
+  const docs = await db.getAll(...refs);
+
+  return docs.map((doc, i) => ({
+    date: keys[i],
+    count: (doc.data()?.count as number) ?? 0,
+  }));
 }
