@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { addPost } from "@/lib/firebase/posts";
+import { notifyDiscord } from "@/lib/notify/discord";
 
 export type PostFormState = { error?: string };
 
@@ -37,6 +38,10 @@ export async function createPostAction(
   }
 
   await addPost({ name: name.trim(), title: title.trim(), content: content.trim() });
+
+  notifyDiscord(
+    `📝 새 글이 올라왔어요\n**${title.trim()}** - ${name.trim()}`
+  );
 
   revalidatePath("/community");
   revalidatePath("/admin/community");
